@@ -1,0 +1,13 @@
+MakefileCC = gcc
+CFLAGS = -Wall
+
+.PHONY : clean
+
+check: test_quadratic_equation
+	./test_quadratic_equation
+
+test_quadratic_equation: test_quadratic_equation.c quadratic_equation.c	
+	$(CC) $(CFLAGS) -o test_quadratic_equation test_quadratic_equation.c quadratic_equation.c -lm
+
+clean:
+	rm -f test_quadratic_equation

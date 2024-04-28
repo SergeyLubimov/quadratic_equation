@@ -1,3 +1,4 @@
-#include <stdio.h>        // подключаем заголовочный файл stdio.h
+#pragma once
+#include <stdio.h>        
 
-void hello();
+double* solve_equation();

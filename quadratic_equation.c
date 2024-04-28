@@ -1,7 +1,8 @@
 
 #include "quadratic_equation.h"
 
-void hello()
+double* solve_equation()
 {
-	printf("\n\nHello, World!!!!\n\n");
+	printf("\n\nHello, World!\n\n");
+	return 0;
 }
