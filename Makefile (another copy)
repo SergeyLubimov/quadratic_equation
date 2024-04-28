@@ -1,9 +1,0 @@
-.PHONY : clean
-	
-clean: test_quadratic_equation
-	rm -f test_quadratic_equation
-	
-check: test_quadratic_equation.c quadratic_equation.c
-	rm -f test_quadratic_equation
-	gcc -Wall -o test_quadratic_equation test_quadratic_equation.c quadratic_equation.c -lm
-	./test_quadratic_equation
