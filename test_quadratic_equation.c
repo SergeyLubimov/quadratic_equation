@@ -44,8 +44,8 @@ main()
 	double test[NUMBER_OF_TESTS][6] =
 	{ 
 		{1, -4, 4, 2, 2, true}, 
-		{1, 3, -4, 1, -4, false}, 
-		{1, -5, 9, 0, 0, true}
+		{1, 3, -4, 1, -4, true}, 
+		{1, -5, 9, 0, 0, false}
 	};
 	double failed_tests[NUMBER_OF_TESTS][4];
 	int number_of_failed_tests;
@@ -82,7 +82,10 @@ main()
 	
 	printf("\r\n\nTesting is completed.\nTotal tests completed: %d.\n%d tests passed, %d tests failed.\n\n",
 		NUMBER_OF_TESTS, NUMBER_OF_TESTS - number_of_failed_tests, number_of_failed_tests);
-	printf("Failed tests:");
+		
+	if(number_of_failed_tests > 0)
+		printf("Failed tests:");
+		
 	for(int i = 0; i < number_of_failed_tests; i++)
 	{
 		int k = failed_tests[i][3];
