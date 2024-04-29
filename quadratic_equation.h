@@ -1,6 +1,5 @@
 #pragma once
-#include <stdio.h>  
-#include <malloc.h>   
-#include <math.h>   
+#include <math.h>  
+#include <stdbool.h> 
 
-double* solve_equation(double, double, double);
+bool solve_equation(double, double, double, double*);
