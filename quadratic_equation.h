@@ -2,4 +2,4 @@
 #include <math.h>  
 #include <stdbool.h> 
 
-bool solve_equation(double, double, double, double*);
+void solve_equation(double, double, double, double*);

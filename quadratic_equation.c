@@ -1,14 +1,23 @@
 #include "quadratic_equation.h"
 
-bool solve_equation(double a, double b, double c, double *x)
+void solve_equation(double a, double b, double c, double *x)
 {	
-	double D = b * b - 4 * a * c;
+	double D = b * b - 4 * a * c;	
 	
+	a *= 2;
 	if(D >= 0)
-	{		
-		x[0] = (-b + sqrt(D)) / (2 * a);
-		x[1] = (-b - sqrt(D)) / (2 * a);
-		return true;
+	{	
+		D = sqrt(D);	
+		x[0] = (-b + D) / a;
+		x[1] = 0;
+		x[2] = (-b - D) / a;
+		x[3] = 0;		
 	}	
-	return false;
+	else
+	{	
+		D = sqrt(-D);
+		x[0] = x[2] = -b / a;
+		x[1] = D / a;		
+		x[3] = -D / a;
+	}
 }
