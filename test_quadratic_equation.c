@@ -7,32 +7,25 @@
 
 void 
 output_solution
-( 
-  double r_x1, double i_x1, double r_x2, double i_x2,
-  double a, double b, double c, 
-  double expected_r_x1, double expected_i_x1, double expected_r_x2, double expected_i_x2
-)
+(double *x, double a, double b, double c, double *expected_x)
 {	
 	printf("\n\t(a = %f, b = %f, d = %f)\n\tResult:", a, b, c);
-	printf("\n\tx1 = %f + %fi,\n\tx2 = %f + %fi.", r_x1, i_x1, r_x2, i_x2);
+	printf("\n\tx1 = %f + %fi,\n\tx2 = %f + %fi.", x[0], x[1], x[2], x[3]);
 		
 	printf("\n\tExpected result:");
-	printf("\n\tx1 = %f + %fi,\n\tx2 = %f + %fi.\n\n", expected_r_x1, expected_i_x1,
-							   expected_r_x2, expected_i_x2); 
+	printf("\n\tx1 = %f + %fi,\n\tx2 = %f + %fi.\n\n", expected_x[0], expected_x[1],
+							   expected_x[2], expected_x[3]); 
 }
 
 
 bool 
 check_the_solution
-( 
-  double r_x1, double i_x1, double r_x2, double i_x2, 
-  double expected_r_x1, double expected_i_x1, double expected_r_x2, double expected_i_x2
-)
+(double *x, double *expexted_x)
 {	
 	if
 	(
-		r_x1 == expected_r_x1 && i_x1 == expected_i_x1 &&
-		r_x2 == expected_r_x2 && i_x2 == expected_i_x2		
+		x[0] == expexted_x[0] && x[1] == expexted_x[1] &&
+		x[2] == expexted_x[2] && x[3] == expexted_x[3]		
 	) 
 	{return true;}
 	
@@ -62,14 +55,8 @@ main()
 		printf("\rCurrent test: %d", i + 1);
 	
 		solve_equation(test[i][0], test[i][1], test[i][2], x);
-		if
-		(
-			!(check_the_solution
-			(
-				x[0], x[1], x[2], x[3],
-				test[i][3], test[i][4], test[i][5], test[i][6]
-			))
-		)
+		
+		if(!(check_the_solution(x, &(test[i][3]))))
 		{
 			failed_tests[number_of_failed_tests][0] = x[0];
 			failed_tests[number_of_failed_tests][1] = x[1];
@@ -89,9 +76,9 @@ main()
 		int k = failed_tests[i][4];
 		output_solution
 		( 
-  			failed_tests[i][0], failed_tests[i][1], failed_tests[i][2], failed_tests[i][3],
+  			&(failed_tests[i][0]), 
   			test[k][0], test[k][1], test[k][2], 
-  			test[k][3], test[k][4], test[k][5], test[k][6]
+  			&(test[k][3])
   		);
 	}
 	
