@@ -1,61 +1,26 @@
-#define NUMBER_OF_TESTS 3
 
 #include <stdio.h>
-#include <malloc.h>
 
 #include "quadratic_equation.h"
+#include "set_of_tests.h"
 
-void 
-output_solution
-( 
-  double x1, double x2, bool is_solution_found,
-  double a, double b, double c, 
-  double expected_x1, double expected_x2, bool is_solution
-)
-{	
-	printf("\n\t(a = %f, b = %f, d = %f)\n\tResult:", a, b, c);
-	if(is_solution_found) printf("\n\tx1 = %f,\n\tx2 = %f.", x1, x2);
-	else  printf("\n\tThere are no solutions.");
-	
-	printf("\n\tExpected result:");
-	if(is_solution) printf("\n\tx1 = %f,\n\tx2 = %f.\n\n", expected_x1, expected_x2); 
-	else printf("\n\tThere are no solutions.\n");
-}
+void output_solution(double x1, double x2, bool is_solution_found, double a, double b, double c, double expected_x1, double expected_x2, bool is_solution);
 
-
-bool 
-check_the_solution
-( 
-  double x1, double x2, bool is_solution_found, 
-  double expected_x1, double expected_x2, bool is_solution
-)
-{
-	if(is_solution_found == is_solution)
-	{
-		if(is_solution_found == false || (x1 == expected_x1 && x2 == expected_x2)) 
-			return true;
-	}
-	return false;
-}
+bool check_the_solution(double x1, double x2, bool is_solution_found, double expected_x1, double expected_x2, bool is_solution);
 
 int 
 main()                 
 {      
-	double test[NUMBER_OF_TESTS][6] =
-	{ 
-		{1, -4, 4, 2, 2, true}, 
-		{1, 3, -4, 1, -4, true}, 
-		{1, -5, 9, 0, 0, false}
-	};
+	double test[NUMBER_OF_TESTS][6] = SET_OF_TESTS;
+	
 	double failed_tests[NUMBER_OF_TESTS][4];
 	int number_of_failed_tests;
 	
-	double *x;
+	double x[2];
 	bool is_solution_found;
 	
 	printf("Testing has started...\n");
 	
-	x = malloc(2 * sizeof(double));
 	number_of_failed_tests = 0;
 	for(int i = 0; i < NUMBER_OF_TESTS; i++)
 	{
@@ -77,8 +42,7 @@ main()
 			failed_tests[number_of_failed_tests][3] = i;
 			number_of_failed_tests++;
 		}
-	}	
-	free(x);
+	}
 	
 	printf("\r\n\nTesting is completed.\nTotal tests completed: %d.\n%d tests passed, %d tests failed.\n\n",
 		NUMBER_OF_TESTS, NUMBER_OF_TESTS - number_of_failed_tests, number_of_failed_tests);
@@ -98,4 +62,36 @@ main()
 	}
 	
 	return 0;                   
-}     
+}    
+
+void 
+output_solution
+( 
+  double x1, double x2, bool is_solution_found,
+  double a, double b, double c, 
+  double expected_x1, double expected_x2, bool is_solution
+)
+{	
+	printf("\n\t(a = %f, b = %f, d = %f)\n\tResult:", a, b, c);
+	if(is_solution_found) printf("\n\tx1 = %f,\n\tx2 = %f.", x1, x2);
+	else  printf("\n\tThere are no solutions.");
+	
+	printf("\n\tExpected result:");
+	if(is_solution) printf("\n\tx1 = %f,\n\tx2 = %f.\n\n", expected_x1, expected_x2); 
+	else printf("\n\tThere are no solutions.\n");
+}
+
+bool 
+check_the_solution
+( 
+  double x1, double x2, bool is_solution_found, 
+  double expected_x1, double expected_x2, bool is_solution
+)
+{
+	if(is_solution_found == is_solution)
+	{
+		if(is_solution_found == false || (x1 == expected_x1 && x2 == expected_x2)) 
+			return true;
+	}
+	return false;
+} 
