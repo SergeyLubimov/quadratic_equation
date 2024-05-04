@@ -2,8 +2,10 @@
 
 #include <stdio.h>
 #include <malloc.h>
+#include <float.h>
 
 #include "quadratic_equation.h"
+#include "set_of_tests.h"
 
 void 
 output_solution
@@ -29,7 +31,7 @@ check_the_solution
 )
 {	
 	if(abs(x1.re) - abs(expected_x1.re) < DBL_EPSILON && abs(x1.im) - abs(expected_x1.im) < DBL_EPSILON && 
-	   abs(x2.re) - abs(expected_x2.re) < DBL_EPSILON && abs(x2.im - expected_x2.im) < DBL_EPSILON) 
+	   abs(x2.re) - abs(expected_x2.re) < DBL_EPSILON && abs(x2.im) - abs(expected_x2.im) < DBL_EPSILON) 
 		return true;	
 	return false;
 }
@@ -37,28 +39,18 @@ check_the_solution
 int 
 main()                 
 {      
-	double coef_test[NUMBER_OF_TESTS][3] =
-	{ 
-		{1, -4, 4}, 
-		{1, 3, -4},
-		{1, -2, 10}
-	};
+	double coef_test[NUMBER_OF_TESTS][3] = SET_OF_COEFFICIENTS;	
 	
-	COMPLEXNUM expected_x[NUMBER_OF_TESTS][2] = 
-	{
-		{{2, 0}, {2, 0}},
-		{{1, 0}, {-4, 0}},
-		{{1, 3}, {1, -3}}
-	};
+	COMPLEXNUM expected_x[NUMBER_OF_TESTS][2] = EXPECTED_RESULT;
 	
 	COMPLEXNUM failed_tests[NUMBER_OF_TESTS][3];
 	int number_of_failed_tests;
 	
-	COMPLEXNUM *x;
+	COMPLEXNUM x[2];
 	
 	printf("Testing has started...\n");
 	
-	x = malloc(2 * sizeof(COMPLEXNUM));	
+	//x = malloc(2 * sizeof(COMPLEXNUM));	
 	
 	number_of_failed_tests = 0;
 	
@@ -83,7 +75,7 @@ main()
 			number_of_failed_tests++;
 		}
 	}	
-	free(x);
+	//free(x);
 	
 	printf("\r\n\nTesting is completed.\nTotal tests completed: %d.\n%d tests passed, %d tests failed.\n\n",
 		NUMBER_OF_TESTS, NUMBER_OF_TESTS - number_of_failed_tests, number_of_failed_tests);
