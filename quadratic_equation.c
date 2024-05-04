@@ -1,16 +1,19 @@
 #include "quadratic_equation.h"
 
-bool solve_equation(double a, double b, double c, double *x)
-{	
-	double D = b * b - 4 * a * c;
+void solve_equation(double a, double b, double c, COMPLEXNUM *x)
+{
+	COMPLEXNUM sqrt_D[DEGREE_OF_Q_EQ];
+	COMPLEXNUM D, cx_a, buff;
 	
-	D = sqrt(D);
-	a *= 2;
-	if(D >= 0)
-	{		
-		x[0] = (-b + D) / a;
-		x[1] = (-b - D) / a;
-		return true;
-	}	
-	return false;
+	D = cxinit(b * b - 4 * a * c);
+	cx_a = cxinit(2 * a);
+	
+	cxsqrt(D, DEGREE_OF_Q_EQ, sqrt_D);	
+	
+	for(int i = 0; i < DEGREE_OF_Q_EQ; i++)
+	{
+		
+		buff = cxsum(cxinit(-b), sqrt_D[i]);
+		x[i] = cxdiv(buff, cx_a);
+	}
 }

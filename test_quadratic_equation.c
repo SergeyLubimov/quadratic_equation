@@ -8,73 +8,78 @@
 void 
 output_solution
 ( 
-  double x1, double x2, bool is_solution_found,
+  COMPLEXNUM x1, COMPLEXNUM x2,
   double a, double b, double c, 
-  double expected_x1, double expected_x2, bool is_solution
+  COMPLEXNUM expected_x1, COMPLEXNUM expected_x2
 )
 {	
 	printf("\n\t(a = %f, b = %f, d = %f)\n\tResult:", a, b, c);
-	if(is_solution_found) printf("\n\tx1 = %f,\n\tx2 = %f.", x1, x2);
-	else  printf("\n\tThere are no solutions.");
+	printf("\n\tx1 = %f + %fi,\n\tx2 = %f + %fi.", x1.re, x1.im, x2.re, x2.im);
 	
 	printf("\n\tExpected result:");
-	if(is_solution) printf("\n\tx1 = %f,\n\tx2 = %f.\n\n", expected_x1, expected_x2); 
-	else printf("\n\tThere are no solutions.\n");
+	printf("\n\tx1 = %f + %fi,\n\tx2 = %f + %fi.\n\n", expected_x1.re, expected_x1.im, 
+							   expected_x2.re, expected_x2.im); 	
 }
-
 
 bool 
 check_the_solution
 ( 
-  double x1, double x2, bool is_solution_found, 
-  double expected_x1, double expected_x2, bool is_solution
+  COMPLEXNUM x1, COMPLEXNUM x2,
+  COMPLEXNUM expected_x1, COMPLEXNUM expected_x2
 )
-{
-	if(is_solution_found == is_solution)
-	{
-		if(is_solution_found == false || (x1 == expected_x1 && x2 == expected_x2)) 
-			return true;
-	}
+{	
+	if(abs(x1.re) - abs(expected_x1.re) < DBL_EPSILON && abs(x1.im) - abs(expected_x1.im) < DBL_EPSILON && 
+	   abs(x2.re) - abs(expected_x2.re) < DBL_EPSILON && abs(x2.im - expected_x2.im) < DBL_EPSILON) 
+		return true;	
 	return false;
 }
 
 int 
 main()                 
 {      
-	double test[NUMBER_OF_TESTS][6] =
+	double coef_test[NUMBER_OF_TESTS][3] =
 	{ 
-		{1, -4, 4, 2, 2, true}, 
-		{1, 3, -4, 1, -4, true}, 
-		{1, -5, 9, 0, 0, false}
+		{1, -4, 4}, 
+		{1, 3, -4},
+		{1, -2, 10}
 	};
-	double failed_tests[NUMBER_OF_TESTS][4];
+	
+	COMPLEXNUM expected_x[NUMBER_OF_TESTS][2] = 
+	{
+		{{2, 0}, {2, 0}},
+		{{1, 0}, {-4, 0}},
+		{{1, 3}, {1, -3}}
+	};
+	
+	COMPLEXNUM failed_tests[NUMBER_OF_TESTS][3];
 	int number_of_failed_tests;
 	
-	double *x;
-	bool is_solution_found;
+	COMPLEXNUM *x;
 	
 	printf("Testing has started...\n");
 	
-	x = malloc(2 * sizeof(double));
+	x = malloc(2 * sizeof(COMPLEXNUM));	
+	
 	number_of_failed_tests = 0;
+	
 	for(int i = 0; i < NUMBER_OF_TESTS; i++)
 	{
-		printf("\rCurrent test: %d", i + 1);
+		printf("\rCurrent test: %d    ", i + 1);		
 	
-		is_solution_found = solve_equation(test[i][0], test[i][1], test[i][2], x);
+		solve_equation(coef_test[i][0], coef_test[i][1], coef_test[i][2], x);
+	
 		if
 		(
 			!(check_the_solution
 			(
-				x[0], x[1], is_solution_found,
-				test[i][3], test[i][4], test[i][5]
+				x[0], x[1],
+				expected_x[i][0], expected_x[i][1]
 			))
 		)
 		{
 			failed_tests[number_of_failed_tests][0] = x[0];
 			failed_tests[number_of_failed_tests][1] = x[1];
-			failed_tests[number_of_failed_tests][2] = is_solution_found;
-			failed_tests[number_of_failed_tests][3] = i;
+			failed_tests[number_of_failed_tests][2].re = i;
 			number_of_failed_tests++;
 		}
 	}	
@@ -88,12 +93,12 @@ main()
 		
 	for(int i = 0; i < number_of_failed_tests; i++)
 	{
-		int k = failed_tests[i][3];
+		int k = failed_tests[i][2].re;
 		output_solution
 		( 
-  			failed_tests[i][0], failed_tests[i][1], failed_tests[i][2],
-  			test[k][0], test[k][1], test[k][2], 
-  			test[k][3], test[k][4], test[k][5]
+  			failed_tests[i][0], failed_tests[i][1],
+  			coef_test[k][0], coef_test[k][1], coef_test[k][2], 
+  			expected_x[k][0], expected_x[k][1]
   		);
 	}
 	

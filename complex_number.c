@@ -8,6 +8,7 @@
 
   Date: April 30, 2024
   Version: 1.0
+  Modification: May 2, 2024
 
   Author: Lyubimov Sergey M.
 *********************************************************************************/
@@ -161,12 +162,19 @@ double cxphase(COMPLEXNUM a)
 {
 	double result;
 	
-	result = atan(a.im / a.re);
+	result = 0;	
+	if(a.re != 0)
+	{	
+		result = atan(a.im / a.re);
 	
-	if(a.re < 0 && a.im != 0)
-	{
-		if(a.im > 0) result += M_PI;
-		else result -= M_PI;
+		if(a.re < 0 /*&& a.im != 0*/)
+		{
+			if(a.im >= 0) result += M_PI;
+			else result -= M_PI;
+		}
 	}
+	else if(a.im > 0) result = M_PI / 2;
+	else if(a.im < 0) result = -M_PI / 2;
+	
 	return result;
 }

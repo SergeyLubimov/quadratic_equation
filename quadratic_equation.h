@@ -1,5 +1,10 @@
 #pragma once
-#include <math.h>  
-#include <stdbool.h> 
 
-bool solve_equation(double, double, double, double*);
+#define DEGREE_OF_Q_EQ 2
+
+#include <stdbool.h> 
+#include <float.h>
+
+#include "complex_number.h"
+
+void solve_equation(double, double, double, COMPLEXNUM*);
