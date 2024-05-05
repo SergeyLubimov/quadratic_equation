@@ -1,9 +1,12 @@
 #define NUMBER_OF_TESTS 3
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <malloc.h>
+#include <float.h>
 
 #include "quadratic_equation.h"
+#include "set_of_tests.h"
 
 void 
 output_solution
@@ -24,8 +27,8 @@ check_the_solution
 {	
 	if
 	(
-		x[0] == expexted_x[0] && x[1] == expexted_x[1] &&
-		x[2] == expexted_x[2] && x[3] == expexted_x[3]		
+		abs(x[0]) - abs(expexted_x[0]) < DBL_EPSILON && abs(x[1]) - abs(expexted_x[1]) < DBL_EPSILON &&
+		abs(x[2]) - abs(expexted_x[2]) < DBL_EPSILON && abs(x[3]) - abs(expexted_x[3]) < DBL_EPSILON		
 	) 
 	{return true;}
 	
@@ -35,12 +38,8 @@ check_the_solution
 int 
 main()                 
 {      
-	double test[NUMBER_OF_TESTS][7] =
-	{ 
-		{1, -4, 4, 2, 0, 2, 0}, 
-		{1, 3, -4, 1, 0, -4, 0}, 
-		{1, -2, 10, 1, 3, 1, -3}
-	};
+	double test[NUMBER_OF_TESTS][7] = SET_OF_TESTS;
+	
 	double failed_tests[NUMBER_OF_TESTS][5];
 	int number_of_failed_tests;
 	
@@ -70,7 +69,10 @@ main()
 	
 	printf("\r\n\nTesting is completed.\nTotal tests completed: %d.\n%d tests passed, %d tests failed.\n\n",
 		NUMBER_OF_TESTS, NUMBER_OF_TESTS - number_of_failed_tests, number_of_failed_tests);
-	printf("Failed tests:");
+		
+	if(number_of_failed_tests) 
+		printf("Failed tests:");
+	
 	for(int i = 0; i < number_of_failed_tests; i++)
 	{
 		int k = failed_tests[i][4];
