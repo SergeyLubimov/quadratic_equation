@@ -12,6 +12,7 @@
 
   Date: May 5, 2024
   Version: 1.0
+  Modification: May 6, 2024
 
   Author: Lyubimov Sergey M.
 *********************************************************************************/
@@ -20,10 +21,12 @@
 
 #define DEGREE_OF_Q_EQ 2
 
+#include <stdbool.h>
+
 #include "complex_number/complex_number.h"
 
 /*
  * Solves a quadratic equation of the form ax^2 + bx + c = 0. As a solution, 
  * it returns a pair of complex numbers of the COMPLEXNUM type.
  */
-void solve_equation(double, double, double, COMPLEXNUM*);
+bool solve_equation(double, double, double, COMPLEXNUM*);
