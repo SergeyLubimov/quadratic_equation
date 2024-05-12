@@ -26,7 +26,7 @@
  * The pointer must lead to a memory area sufficient
  * for four double numbers.
  * 
- * The result will be presented as two complex numbers in a double array in the format: 
+ * The result will be presented as two complex numbers in an array of type double in the format: 
  * {real, imaginary, real, imaginary}.
  */
 bool 
