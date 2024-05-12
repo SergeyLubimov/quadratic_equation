@@ -22,6 +22,6 @@ as four double numbers in the format:
 ### Version with Complex Numbers (VCN)
 This is the VCN branch. This version finds the complex roots of the quadratic equation. 
 The solve_equation function works using tools for working with the complex numbers of 
-the cumplex_number module (located in the repository of this branch). 
+the complex_number module (located in the repository of this branch). 
 The solve_equation function represents the solution as an array of two structures 
-of the COMPLEX NUM type defined in cumplex_number.h.
+of the COMPLEXNUM type defined in cumplex_number.h.
