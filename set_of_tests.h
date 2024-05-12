@@ -2,11 +2,11 @@
 
 /* Define the test suite in the following format:
 
-#define SET_OF_COEFFICIENTS		\
-{ 					\
-  Test 1	{a1, b1, c1}, 		\
-		...
-  Test n	{an, bn, cn}		\
+#define SET_OF_COEFFICIENTS						\
+{ 									\
+  Test 1	{a1, b1, c1, (is the equation quadratic, i.e. a != 0)}, \
+		...							\
+  Test n	{an, bn, cn, (is the equation quadratic, i.e. a != 0)}	\
 };
 
 */

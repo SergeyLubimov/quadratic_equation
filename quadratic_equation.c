@@ -5,7 +5,7 @@
   The quadratic_equation module provides a tool for solving quadratic equations.
   
   This is the source file of the module version using complex numbers. 
-  Here is the definition of a function for solving quadratic equations.
+  Here is the definition of the function for solving quadratic equations.
   
 
   Date: May 5, 2024
@@ -27,7 +27,8 @@
  * 
  * The result will be presented as two complex numbers of the COMPLEXNUM type.
  */
-bool solve_equation(double a, double b, double c, COMPLEXNUM *x)
+bool 
+solve_equation(double a, double b, double c, COMPLEXNUM *x)
 {
 	COMPLEXNUM sqrt_D[DEGREE_OF_Q_EQ];
 	COMPLEXNUM D, cx_a, buff;

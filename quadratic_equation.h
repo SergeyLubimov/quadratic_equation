@@ -5,7 +5,7 @@
   The quadratic_equation module provides a tool for solving quadratic equations.
 
   This is the header file of the module version using complex numbers. Here is 
-  a prototype of a function that uses the COMPLEXNUM data type and tools 
+  a prototype of the function that uses the COMPLEXNUM data type and tools 
   for working with it, which are presented in the complex_number module, 
   to solve a quadratic equation.
 
