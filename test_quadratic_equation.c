@@ -6,8 +6,8 @@
 
   This file is intended for testing the quadratic_equation module. 
   It presents the main function for running tests presented in 
-  the set_of_test.h file. The function compares the solutions obtained 
-  with the expected values (presented in the set_of_test file.h), 
+  the set_of_test.h. The function compares the solutions obtained 
+  with the expected values (presented in the set_of_test.h), 
   and outputs the report to the console.
 
 
