@@ -1,8 +1,10 @@
 #include "quadratic_equation.h"
 
-void solve_equation(double a, double b, double c, double *x)
+bool solve_equation(double a, double b, double c, double *x)
 {	
 	double D = b * b - 4 * a * c;	
+	
+	if(a == 0) return false;
 	
 	a *= 2;
 	if(D >= 0)
@@ -20,4 +22,5 @@ void solve_equation(double a, double b, double c, double *x)
 		x[1] = D / a;		
 		x[3] = -D / a;
 	}
+	return true;
 }

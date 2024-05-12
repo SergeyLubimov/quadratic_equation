@@ -1,5 +1,3 @@
-#define NUMBER_OF_TESTS 3
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <malloc.h>
@@ -10,27 +8,40 @@
 
 void 
 output_solution
-(double *x, double a, double b, double c, double *expected_x)
+(
+	double *x, bool is_solution_found, 
+	double a, double b, double c, 
+	double *expected_x, bool is_solution
+)
 {	
 	printf("\n\t(a = %f, b = %f, d = %f)\n\tResult:", a, b, c);
-	printf("\n\tx1 = %f + %fi,\n\tx2 = %f + %fi.", x[0], x[1], x[2], x[3]);
+	if(is_solution_found)
+		printf("\n\tx1 = %f + %fi,\n\tx2 = %f + %fi.", x[0], x[1], x[2], x[3]);
+	else printf("\n\tError: the equation is not square.");
 		
 	printf("\n\tExpected result:");
-	printf("\n\tx1 = %f + %fi,\n\tx2 = %f + %fi.\n\n", expected_x[0], expected_x[1],
-							   expected_x[2], expected_x[3]); 
+	if(is_solution)
+		printf("\n\tx1 = %f + %fi,\n\tx2 = %f + %fi.\n\n", expected_x[0], expected_x[1],
+							 	   expected_x[2], expected_x[3]); 
+	else printf("\n\tAn error was expected.");
 }
 
 
 bool 
 check_the_solution
-(double *x, double *expexted_x)
+(double *x, bool is_solution_found, double *expexted_x, bool is_solution)
 {	
-	if
-	(
-		abs(x[0]) - abs(expexted_x[0]) < DBL_EPSILON && abs(x[1]) - abs(expexted_x[1]) < DBL_EPSILON &&
-		abs(x[2]) - abs(expexted_x[2]) < DBL_EPSILON && abs(x[3]) - abs(expexted_x[3]) < DBL_EPSILON		
-	) 
-	{return true;}
+	if(is_solution_found == is_solution)
+	{
+		if
+		(is_solution_found == false ||
+			(
+				abs(x[0]) - abs(expexted_x[0]) < DBL_EPSILON && abs(x[1]) - abs(expexted_x[1]) < DBL_EPSILON &&
+				abs(x[2]) - abs(expexted_x[2]) < DBL_EPSILON && abs(x[3]) - abs(expexted_x[3]) < DBL_EPSILON
+			)		
+		) 
+		return true;
+	}		
 	
 	return false;	
 }
@@ -38,9 +49,11 @@ check_the_solution
 int 
 main()                 
 {      
-	double test[NUMBER_OF_TESTS][7] = SET_OF_TESTS;
+	double test[NUMBER_OF_TESTS][8] = SET_OF_TESTS;
 	
-	double failed_tests[NUMBER_OF_TESTS][5];
+	bool is_solution_found;
+	
+	double failed_tests[NUMBER_OF_TESTS][6];
 	int number_of_failed_tests;
 	
 	double *x;
@@ -53,15 +66,16 @@ main()
 	{
 		printf("\rCurrent test: %d", i + 1);
 	
-		solve_equation(test[i][0], test[i][1], test[i][2], x);
+		is_solution_found = solve_equation(test[i][0], test[i][1], test[i][2], x);
 		
-		if(!(check_the_solution(x, &(test[i][3]))))
+		if(!(check_the_solution(x, is_solution_found, &(test[i][3]), test[i][7])))
 		{
 			failed_tests[number_of_failed_tests][0] = x[0];
 			failed_tests[number_of_failed_tests][1] = x[1];
 			failed_tests[number_of_failed_tests][2] = x[2];
 			failed_tests[number_of_failed_tests][3] = x[3];
-			failed_tests[number_of_failed_tests][4] = i;
+			failed_tests[number_of_failed_tests][4] = is_solution_found;
+			failed_tests[number_of_failed_tests][5] = i;
 			number_of_failed_tests++;
 		}
 	}	
@@ -78,9 +92,9 @@ main()
 		int k = failed_tests[i][4];
 		output_solution
 		( 
-  			&(failed_tests[i][0]), 
+  			&(failed_tests[i][0]), failed_tests[i][4],
   			test[k][0], test[k][1], test[k][2], 
-  			&(test[k][3])
+  			&(test[k][3]), test[i][7]
   		);
 	}
 	
