@@ -4,7 +4,7 @@
   
  #define SET_OF_TESTS										       	  \
 { 													  \
-		     |expected_x1  |  |expected_x2  |							  \
+		     	     |expected_x1  |  |expected_x2  |						  \
   Test 1	{a1, b1, c1, real, imaginary, real, imaginary, (is the equation quadratic, i.e. a != 0)}, \
 		...											  \
   Test n	{an, bn, cn, real, imaginary, real, imaginary, (is the equation quadratic, i.e. a != 0)}  \
