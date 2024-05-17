@@ -19,6 +19,8 @@
 
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <float.h>
 
 #include "quadratic_equation.h"
 #include "set_of_tests.h"
@@ -128,7 +130,7 @@ check_the_solution
 {
 	if(is_solution_found == is_solution)
 	{
-		if(is_solution_found == false || (x1 == expected_x1 && x2 == expected_x2)) 
+		if(is_solution_found == false || (abs(x1 - expected_x1) < DBL_EPSILON && abs(x2 - expected_x2) < DBL_EPSILON)) 
 			return true;
 	}
 	return false;
