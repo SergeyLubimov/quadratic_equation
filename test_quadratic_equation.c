@@ -137,8 +137,8 @@ check_the_solution
 		if
 		(is_solution_found == false ||
 			(
-				abs(x[0]) - abs(expexted_x[0]) < DBL_EPSILON && abs(x[1]) - abs(expexted_x[1]) < DBL_EPSILON &&
-				abs(x[2]) - abs(expexted_x[2]) < DBL_EPSILON && abs(x[3]) - abs(expexted_x[3]) < DBL_EPSILON
+				abs(x[0] - expexted_x[0]) < DBL_EPSILON && abs(x[1] - expexted_x[1]) < DBL_EPSILON &&
+				abs(x[2] - expexted_x[2]) < DBL_EPSILON && abs(x[3] - expexted_x[3]) < DBL_EPSILON
 			)		
 		) 
 		return true;
