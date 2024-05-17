@@ -138,8 +138,8 @@ check_the_solution
 		if
 		(is_solution_found == false || 	
 			(
-				abs(x1.re) - abs(expected_x1.re) < DBL_EPSILON && abs(x1.im) - abs(expected_x1.im) < DBL_EPSILON && 
-	   			abs(x2.re) - abs(expected_x2.re) < DBL_EPSILON && abs(x2.im) - abs(expected_x2.im) < DBL_EPSILON
+				abs(x1.re - expected_x1.re) < DBL_EPSILON && abs(x1.im - expected_x1.im) < DBL_EPSILON && 
+	   			abs(x2.re - expected_x2.re) < DBL_EPSILON && abs(x2.im - expected_x2.im) < DBL_EPSILON
 	   		)
 	   	) 
 			return true;	
